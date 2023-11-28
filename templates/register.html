@@ -18,8 +18,12 @@
           <input type="password" id="password" name="password" required /><br />
           <br />
           <button class="button" type="submit">Register</button>
+
+          {% if error %}
+          <p class="error">{{ error | tojson }}</p>
+          {% endif %}
         </form>
-        <br/>
+        <br />
         <a class="button" href="{{ url_for('login')}}">Login</a>
       </main>
     </div>

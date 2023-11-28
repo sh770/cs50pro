@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 from waitress import serve
 import json
 
@@ -59,12 +59,13 @@ def register():
 
         # בדיקה אם המשתמש כבר קיים
         if any(user['username'] == username for user in users):
-            return render_template("register.html", error="Username already exists")
+            # return render_template("register.html", error="Username already exists")
+            return jsonify({'error': 'Username already exists'}), 400
 
         # הוספת המשתמש החדש
         write_user_to_file(username, password)
-
-        return redirect(url_for('home'))
+        
+        return jsonify({'success': 'Registration successful'}), 200 ,redirect(url_for('home'))
 
     return render_template("register.html")
 
