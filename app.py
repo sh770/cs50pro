@@ -65,8 +65,10 @@ def register():
         # הוספת המשתמש החדש
         write_user_to_file(username, password)
         
-        return jsonify({'success': 'Registration successful'}), 200 ,redirect(url_for('home'))
-
+        jsonify({'success': 'Registration successful'}), 200
+        return redirect(url_for('home'))
+        
+        
     return render_template("register.html")
 
 
